@@ -1,21 +1,16 @@
-# 🎯 Smart Job Recommendation System
+# 🤖 AI Job Recommender - Web Application
 
-An intelligent resume-to-job matching system that automatically detects your resume type and recommends the most relevant positions.
+A modern web application that analyzes your resume and provides personalized job recommendations using AI-powered skill matching and SerpApi Google Jobs integration.
 
 ## ✨ Features
 
-- **🔍 Automatic Resume Type Detection**: Automatically identifies if your resume is focused on:
-  - Cybersecurity
-  - Software Development
-  - Data Science
-  - DevOps
-  - Cloud Engineering
-
-- **🚀 Smart Query Generation**: Creates optimized job search queries based on your detected skills
-- **📊 Domain-Aware Ranking**: Jobs are ranked using domain-specific scoring for better matches
-- **💼 Multiple Job Sources**: Fetches jobs from Google Jobs via SerpApi
-- **📈 Detailed Analysis**: Shows resume analysis, domain scores, and matching insights
-- **💾 CSV Export**: Saves results with detailed matching information
+- **📄 Resume Upload**: Support for PDF, DOCX, and TXT files
+- **🔍 AI-Powered Analysis**: Advanced resume parsing and skill detection
+- **🎯 Smart Job Matching**: Domain-aware job recommendations with similarity scoring
+- **🌍 Location-Based Search**: Customizable job location preferences
+- **📊 Detailed Results**: Comprehensive resume analysis and job insights
+- **💾 CSV Export**: Download job recommendations for offline review
+- **🎨 Modern UI**: Beautiful, responsive web interface
 
 ## 🚀 Quick Start
 
@@ -25,151 +20,141 @@ An intelligent resume-to-job matching system that automatically detects your res
 pip install -r requirements.txt
 ```
 
-### 2. Set Your SerpApi Key
+### 2. Configure API Key
+
+You need a SerpApi API key to fetch job listings. Get one for free at [serpapi.com](https://serpapi.com).
+
+**Option A: Edit config.py**
+```python
+SERPAPI_API_KEY = "your_api_key_here"
+```
+
+**Option B: Environment Variable**
+```bash
+# Windows PowerShell
+$env:SERPAPI_API_KEY="your_api_key_here"
+
+# Windows Command Prompt
+set SERPAPI_API_KEY=your_api_key_here
+```
+
+### 3. Run the Application
 
 ```bash
-# Option 1: Environment variable
-export SERPAPI_API_KEY="your_api_key_here"
-
-# Option 2: Command line argument
-python job_recommender.py --resume your_resume.pdf --api-key "your_api_key_here"
+python app.py
 ```
 
-### 3. Run the System
+### 4. Open Your Browser
 
-```bash
-python job_recommender.py --resume your_resume.pdf
+Navigate to `http://localhost:5000` and start using the application!
+
+## 📱 How to Use
+
+1. **Upload Resume**: Drag & drop or click to upload your resume (PDF, DOCX, or TXT)
+2. **Set Location**: Enter your preferred job location (e.g., "Bangalore", "New York")
+3. **Analyze**: Click "Analyze Resume & Find Jobs" to start the AI analysis
+4. **View Results**: See your resume analysis and job recommendations
+5. **Apply**: Click "Apply Now" to go directly to job applications
+6. **Download**: Get a CSV file with all recommendations for offline review
+
+## 🔧 Supported Resume Formats
+
+- **PDF** (.pdf) - Most common format
+- **DOCX** (.docx) - Microsoft Word documents
+- **TXT** (.txt) - Plain text files
+
+## 🎯 AI Analysis Features
+
+The system automatically detects:
+
+- **Primary Domain**: Your main skill area (JavaScript, Python, Java, etc.)
+- **Subdomain**: Specific specialization (Frontend, Backend, Full Stack, etc.)
+- **Skill Scores**: Confidence levels for different skill areas
+- **Technology Matches**: Frameworks, tools, and databases you know
+
+## 🏢 Job Matching Algorithm
+
+1. **Resume Analysis**: AI extracts skills, experience, and domain focus
+2. **Smart Query Generation**: Creates optimized job search queries
+3. **Job Fetching**: Retrieves relevant jobs from Google Jobs via SerpApi
+4. **Similarity Ranking**: Uses sentence transformers for semantic matching
+5. **Domain Boosting**: Applies domain-specific scoring for better matches
+
+## 📊 Output Features
+
+- **Resume Analysis**: Detailed breakdown of detected skills and domains
+- **Job Recommendations**: Ranked list of best-matching jobs
+- **Similarity Scores**: Base similarity + domain boost percentages
+- **Direct Apply Links**: One-click access to job applications
+- **CSV Export**: Downloadable spreadsheet with all recommendations
+
+## 🛠️ Technical Details
+
+- **Backend**: Flask web framework
+- **AI Models**: Sentence Transformers for semantic similarity
+- **Job Data**: SerpApi Google Jobs integration
+- **File Processing**: PyPDF2, docx2txt for resume parsing
+- **Frontend**: Modern HTML5, CSS3, and JavaScript
+
+## 🔑 API Configuration
+
+The application requires a SerpApi API key for job fetching. The free tier includes:
+- 100 searches per month
+- Google Jobs data
+- Real-time job listings
+
+## 📁 Project Structure
+
 ```
-
-## 📋 Usage Examples
-
-### Basic Usage
-```bash
-python job_recommender.py --resume resume.pdf
+job-recommendation-/
+├── app.py                 # Main Flask application
+├── job_recommender.py     # Core AI and job matching logic
+├── config.py             # Configuration and API keys
+├── templates/
+│   └── index.html        # Web interface
+├── requirements.txt       # Python dependencies
+└── README.md             # This file
 ```
-
-### With Custom Location
-```bash
-python job_recommender.py --resume resume.pdf --location "Mumbai"
-```
-
-### LinkedIn Jobs Only
-```bash
-python job_recommender.py --resume resume.pdf --linkedin-only
-```
-
-### Custom Number of Results
-```bash
-python job_recommender.py --resume resume.pdf --top 20
-```
-
-### Custom Output File
-```bash
-python job_recommender.py --resume resume.pdf --out "my_jobs.csv"
-```
-
-## 🔧 How It Works
-
-### 1. Resume Analysis
-The system analyzes your resume and detects the primary domain:
-- **Cybersecurity**: Security tools, certifications, threat analysis
-- **Software Development**: Programming languages, frameworks, web technologies
-- **Data Science**: ML/AI, statistics, data visualization tools
-- **DevOps**: CI/CD, containers, cloud platforms, monitoring
-- **Cloud Engineering**: Cloud services, infrastructure, serverless
-
-### 2. Smart Query Generation
-Based on detected skills, it generates optimized job search queries:
-- **Cybersecurity**: "Cybersecurity Wireshark Nmap Bangalore jobs"
-- **Software Dev**: "Software Developer Python React Bangalore jobs"
-- **Data Science**: "Data Scientist Machine Learning Python Bangalore jobs"
-
-### 3. Domain-Aware Ranking
-Jobs are scored using:
-- **Base Similarity**: Semantic matching between resume and job description
-- **Domain Boost**: Extra points for domain-relevant keywords
-- **Final Score**: Combined score for optimal ranking
-
-## 📊 Output Format
-
-### Console Output
-```
-🎯 Top Cybersecurity Job Recommendations:
-
-1. Cybersecurity Engineer - TechCorp
-   📍 Bangalore, India | Source: LinkedIn
-   📊 Match: 85.2% (Base: 65.2% + Domain: +20.0%)
-   🚀 Cybersecurity Boost Applied | 🎯 Cybersecurity Role
-   🔗 Apply: [Job Link]
-```
-
-### CSV Output
-The CSV includes columns for:
-- Title, Company, Location, Source
-- Primary Domain
-- Base Match %, Domain Boost %, Final Match %
-- Apply Link
-
-## 🧪 Testing
-
-Test the resume analysis system:
-
-```bash
-python test_resume_analysis.py
-```
-
-This will show how the system detects different resume types and generates appropriate queries.
-
-## 📁 Supported Resume Formats
-
-- **PDF**: Using PyPDF2
-- **DOCX**: Using docx2txt
-- **TXT**: Plain text files
-
-## 🔑 API Requirements
-
-- **SerpApi**: For fetching Google Jobs data
-- Get your API key from [serpapi.com](https://serpapi.com)
-
-## 🎯 Resume Optimization Tips
-
-### For Better Cybersecurity Matches:
-- Include security tools: Wireshark, Nmap, Metasploit, Burp Suite
-- Mention certifications: CompTIA Security+, CEH, CISSP
-- Use security keywords: penetration testing, vulnerability assessment, incident response
-
-### For Better Software Development Matches:
-- List programming languages: Python, Java, JavaScript, C++
-- Include frameworks: React, Angular, Django, Spring
-- Mention technologies: REST APIs, databases, cloud platforms
-
-### For Better Data Science Matches:
-- Include ML/AI keywords: machine learning, deep learning, AI
-- List tools: Python, R, SQL, Pandas, TensorFlow
-- Mention domains: NLP, computer vision, predictive modeling
 
 ## 🚨 Troubleshooting
 
-### Common Issues:
+### Common Issues
 
-1. **API Key Error**: Make sure your SerpApi key is valid and has credits
-2. **No Jobs Found**: Try changing the location or check if the query is too specific
-3. **Poor Matches**: Ensure your resume has relevant keywords for your target domain
+1. **API Key Error**: Make sure your SerpApi API key is correctly configured
+2. **File Upload Error**: Ensure your resume file is under 16MB and in supported format
+3. **No Jobs Found**: Try changing the location or check if your API key has remaining credits
+4. **Import Errors**: Install all dependencies with `pip install -r requirements.txt`
 
-### Performance Tips:
+### File Size Limits
 
-1. **Resume Length**: Keep resumes focused and relevant (1-2 pages)
-2. **Keyword Density**: Include domain-specific keywords naturally
-3. **Skill Organization**: Group related skills together for better detection
+- Maximum resume file size: 16MB
+- Supported formats: PDF, DOCX, TXT
+- Ensure files contain readable text (not scanned images)
+
+## 🔒 Privacy & Security
+
+- Resume files are processed temporarily and deleted after analysis
+- No personal data is stored permanently
+- All processing happens locally on your machine
+- API calls are made securely to SerpApi
+
+## 📈 Future Enhancements
+
+- [ ] Resume template suggestions
+- [ ] Skill gap analysis
+- [ ] Salary range predictions
+- [ ] Company culture insights
+- [ ] Interview preparation tips
+- [ ] Resume optimization suggestions
 
 ## 🤝 Contributing
 
-Feel free to contribute by:
-- Adding new domain detection patterns
-- Improving the ranking algorithms
-- Adding support for more resume formats
-- Enhancing the query generation logic
+Feel free to submit issues, feature requests, or pull requests to improve the application!
 
 ## 📄 License
 
 This project is open source and available under the MIT License.
+
+---
+
+**Happy job hunting! 🎯✨**

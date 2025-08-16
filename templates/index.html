@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Job Recommender - Upload Resume & Get Job Matches</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .upload-section {
+            margin-bottom: 40px;
+        }
+
+        .upload-area {
+            border: 3px dashed #ddd;
+            border-radius: 15px;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background-color: #f8f9ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #667eea;
+            background-color: #f0f4ff;
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .upload-text {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .upload-hint {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .location-section {
+            margin-bottom: 30px;
+        }
+
+        .location-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .location-section input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .location-section input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .upload-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results-section {
+            display: none;
+            margin-top: 40px;
+        }
+
+        .resume-analysis {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .resume-analysis h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .analysis-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .analysis-item .label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .analysis-item .value {
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .query-display {
+            background: #e8f4fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 5px solid #2196f3;
+        }
+
+        .query-display h4 {
+            color: #2196f3;
+            margin-bottom: 10px;
+        }
+
+        .query-text {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: #333;
+        }
+
+        .jobs-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .job-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .job-company {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .job-match {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .job-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .job-detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .job-detail i {
+            color: #667eea;
+            width: 16px;
+        }
+
+        .job-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .apply-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .apply-btn:hover {
+            background: #218838;
+        }
+
+        .download-csv {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-csv:hover {
+            background: #138496;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .stats-bar {
+            background: #f8f9ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stats-label {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .job-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Job Recommender</h1>
+            <p>Upload your resume and get personalized job recommendations powered by AI</p>
+        </div>
+
+        <div class="main-content">
+            <div class="upload-section">
+                <h2>📄 Upload Your Resume</h2>
+                <p style="color: #666; margin-bottom: 20px;">
+                    Upload your resume in PDF, DOCX, or TXT format. Our AI will analyze your skills and find the best job matches for you.
+                </p>
+
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Click to upload or drag & drop your resume</div>
+                    <div class="upload-hint">Supports PDF, DOCX, and TXT files (Max 16MB)</div>
+                    <input type="file" id="resumeFile" class="file-input" accept=".pdf,.docx,.txt">
+                </div>
+
+                <div class="location-section">
+                    <label for="location">📍 Preferred Job Location:</label>
+                    <input type="text" id="location" placeholder="e.g., Bangalore, New York, London" value="Bangalore">
+                </div>
+
+                <button class="upload-btn" id="uploadBtn" onclick="uploadResume()">
+                    🚀 Analyze Resume & Find Jobs
+                </button>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>🔍 Analyzing your resume and finding the best job matches...</p>
+                <p style="color: #666; font-size: 0.9rem;">This may take a few moments</p>
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <div class="stats-bar">
+                    <div class="stats-number" id="jobsCount">0</div>
+                    <div class="stats-label">Job Matches Found</div>
+                </div>
+
+                <div class="resume-analysis" id="resumeAnalysis">
+                    <!-- Resume analysis will be populated here -->
+                </div>
+
+                <div class="query-display" id="queryDisplay">
+                    <!-- Query display will be populated here -->
+                </div>
+
+                <div class="jobs-section">
+                    <h3>🎯 Recommended Jobs</h3>
+                    <div id="jobsList">
+                        <!-- Jobs will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // File upload handling
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('resumeFile');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const loading = document.getElementById('loading');
+        const resultsSection = document.getElementById('resultsSection');
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                updateUploadText();
+            }
+        });
+
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', updateUploadText);
+
+        function updateUploadText() {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                uploadArea.querySelector('.upload-text').textContent = `Selected: ${file.name}`;
+                uploadArea.querySelector('.upload-hint').textContent = `File size: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+            }
+        }
+
+        async function uploadResume() {
+            const file = fileInput.files[0];
+            const location = document.getElementById('location').value;
+
+            if (!file) {
+                showMessage('Please select a resume file first.', 'error');
+                return;
+            }
+
+            if (!location.trim()) {
+                showMessage('Please enter a preferred job location.', 'error');
+                return;
+            }
+
+            // Show loading
+            loading.style.display = 'block';
+            uploadBtn.disabled = true;
+            resultsSection.style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('resume', file);
+            formData.append('location', location);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    displayResults(data);
+                } else {
+                    showMessage(data.error || 'An error occurred while processing your resume.', 'error');
+                }
+            } catch (error) {
+                showMessage('Network error. Please check your connection and try again.', 'error');
+                console.error('Error:', error);
+            } finally {
+                loading.style.display = 'none';
+                uploadBtn.disabled = false;
+            }
+        }
+
+        function displayResults(data) {
+            // Update stats
+            document.getElementById('jobsCount').textContent = data.jobs_count;
+
+            // Display resume analysis
+            const analysisHtml = `
+                <h3>📋 Resume Analysis Results</h3>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <div class="label">Primary Domain</div>
+                        <div class="value">${data.resume_analysis.primary_domain}</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="label">Subdomain</div>
+                        <div class="value">${data.resume_analysis.subdomain}</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="label">Primary Score</div>
+                        <div class="value">${data.resume_analysis.primary_score}%</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="label">Top Domains</div>
+                        <div class="value">${data.resume_analysis.top_domains.length}</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <strong>Top Skills Detected:</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        ${data.resume_analysis.top_domains.map(d => `<li>${d.domain} (${d.score}%)</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <details style="margin-top: 20px;">
+                    <summary style="cursor: pointer; color: #667eea; font-weight: 600;">
+                        🔍 View Detailed Domain Analysis (Click to expand)
+                    </summary>
+                    <div style="background: #f8f9ff; padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px solid #e9ecef;">
+                        ${Object.entries(data.resume_analysis.detailed_analysis || {}).map(([domain, analysis]) => `
+                            <div style="margin-bottom: 15px; padding: 10px; background: white; border-radius: 6px; border-left: 4px solid ${analysis.score > 20 ? '#28a745' : analysis.score > 10 ? '#ffc107' : '#dc3545'};">
+                                <h4 style="margin: 0 0 8px 0; color: #333;">${domain} (${analysis.score}%)</h4>
+                                ${analysis.keyword_matches && analysis.keyword_matches.length > 0 ? `
+                                    <div style="margin-bottom: 5px;">
+                                        <strong>Keywords:</strong> ${analysis.keyword_matches.join(', ')}
+                                    </div>
+                                ` : ''}
+                                ${analysis.framework_matches && analysis.framework_matches.length > 0 ? `
+                                    <div style="margin-bottom: 5px;">
+                                        <strong>Frameworks:</strong> ${analysis.framework_matches.join(', ')}
+                                    </div>
+                                ` : ''}
+                                ${analysis.tool_matches && analysis.tool_matches.length > 0 ? `
+                                    <div style="margin-bottom: 5px;">
+                                        <strong>Tools:</strong> ${analysis.tool_matches.join(', ')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </details>
+                
+                <details style="margin-top: 20px;">
+                    <summary style="cursor: pointer; color: #667eea; font-weight: 600;">
+                        🔍 View Extracted Resume Text (Click to expand)
+                    </summary>
+                    <div style="background: #f8f9ff; padding: 15px; border-radius: 8px; margin-top: 10px; max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 0.9rem; white-space: pre-wrap; border: 1px solid #e9ecef;">
+                        ${data.extracted_text || 'Resume text not available'}
+                    </div>
+                </details>
+            `;
+            document.getElementById('resumeAnalysis').innerHTML = analysisHtml;
+
+            // Display query
+            const queryHtml = `
+                <h4>🔍 AI-Generated Job Search Query</h4>
+                <div class="query-text">${data.query}</div>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                    This query was automatically generated based on your resume analysis to find the most relevant jobs.
+                </p>
+                <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <strong>💡 How the Query Was Generated:</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li><strong>Primary Domain:</strong> ${data.resume_analysis.primary_domain}</li>
+                        <li><strong>Subdomain:</strong> ${data.resume_analysis.subdomain}</li>
+                        <li><strong>Location:</strong> ${data.location || 'Default location'}</li>
+                        <li><strong>Focus:</strong> The system detected your expertise in ${data.resume_analysis.primary_domain.toLowerCase()} and created a targeted search</li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('queryDisplay').innerHTML = queryHtml;
+
+            // Display jobs with more detailed information
+            const jobsHtml = data.top_jobs.map((job, index) => `
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">${job.title}</div>
+                            <div class="job-company">${job.company}</div>
+                        </div>
+                        <div class="job-match">${job.similarity}% Match</div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail">
+                            <i>📍</i>
+                            <span>${job.location}</span>
+                        </div>
+                        <div class="job-detail">
+                            <i>🏢</i>
+                            <span>${job.source}</span>
+                        </div>
+                        <div class="job-detail">
+                            <i>📊</i>
+                            <span>Base: ${job.base_similarity}% + Domain: +${job.domain_boost}%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">${job.description}</div>
+                    
+                    <div style="background: #f8f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>🎯 Why This Job Matches Your Resume:</strong>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>Base Similarity (${job.base_similarity}%):</strong> General skill and experience match</li>
+                            <li><strong>Domain Boost (+${job.domain_boost}%):</strong> Specific to your ${data.resume_analysis.primary_domain.toLowerCase()} background</li>
+                            <li><strong>Final Score (${job.similarity}%):</strong> Combined relevance score</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="${job.apply_link}" target="_blank" class="apply-btn">Apply Now</a>
+                        <a href="/download/${data.csv_download}" class="download-csv">Download CSV</a>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('jobsList').innerHTML = jobsHtml;
+
+            // Show results
+            resultsSection.style.display = 'block';
+            
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Show success message
+            showMessage(`Successfully found ${data.jobs_count} job matches based on your resume!`, 'success');
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'error' ? 'error-message' : 'success-message';
+            messageDiv.textContent = message;
+            
+            // Remove existing messages
+            const existingMessages = document.querySelectorAll('.error-message, .success-message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            // Insert message after upload section
+            const uploadSection = document.querySelector('.upload-section');
+            uploadSection.parentNode.insertBefore(messageDiv, uploadSection.nextSibling);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

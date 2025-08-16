@@ -561,80 +561,90 @@ def analyze_resume_type(resume_text: str) -> dict:
                 "react", "react.js", "angular", "vue", "vue.js", "next.js", "nuxt.js",
                 "express.js", "express", "mern", "mean", "full stack", "fullstack",
                 "frontend", "backend", "web development", "web developer", "frontend developer",
-                "backend developer", "full stack developer", "fullstack developer"
+                "backend developer", "full stack developer", "fullstack developer", "web application",
+                "single page application", "spa", "progressive web app", "pwa", "responsive design",
+                "ui/ux", "user interface", "user experience", "api development", "rest api",
+                "graphql", "microservices", "serverless", "jquery", "bootstrap", "tailwindcss"
             ],
-            "tools": ["npm", "yarn", "webpack", "babel", "eslint", "prettier", "jest", "mocha"],
-            "frameworks": ["react", "angular", "vue", "express", "fastify", "koa", "next.js", "nuxt.js"],
-            "databases": ["mongodb", "mysql", "postgresql", "firebase", "redis"],
-            "cloud": ["aws", "vercel", "netlify", "heroku", "digitalocean"]
+            "tools": ["npm", "yarn", "webpack", "babel", "eslint", "prettier", "jest", "mocha", "cypress", "storybook"],
+            "frameworks": ["react", "angular", "vue", "express", "fastify", "koa", "next.js", "nuxt.js", "gatsby", "svelte"],
+            "databases": ["mongodb", "mysql", "postgresql", "firebase", "redis", "sqlite"],
+            "cloud": ["aws", "vercel", "netlify", "heroku", "digitalocean", "firebase hosting"]
         },
         "python_development": {
             "keywords": [
                 "python", "django", "flask", "fastapi", "pyramid", "bottle", "cherrypy",
                 "python developer", "django developer", "flask developer", "backend developer",
-                "api developer", "python engineer", "software engineer python"
+                "api developer", "python engineer", "software engineer python", "web scraping",
+                "automation", "scripting", "data processing", "backend api", "restful api"
             ],
-            "tools": ["pip", "virtualenv", "conda", "pytest", "unittest", "black", "flake8"],
-            "frameworks": ["django", "flask", "fastapi", "pyramid", "bottle"],
-            "databases": ["postgresql", "mysql", "sqlite", "mongodb", "redis"],
-            "cloud": ["aws", "azure", "gcp", "heroku", "digitalocean"]
+            "tools": ["pip", "virtualenv", "conda", "pytest", "unittest", "black", "flake8", "celery"],
+            "frameworks": ["django", "flask", "fastapi", "pyramid", "bottle", "tornado"],
+            "databases": ["postgresql", "mysql", "sqlite", "mongodb", "redis", "sqlalchemy"],
+            "cloud": ["aws", "azure", "gcp", "heroku", "digitalocean", "pythonanywhere"]
         },
         "java_development": {
             "keywords": [
                 "java", "spring", "spring boot", "spring framework", "hibernate", "maven",
                 "gradle", "java developer", "spring developer", "backend developer",
-                "java engineer", "software engineer java", "enterprise java"
+                "java engineer", "software engineer java", "enterprise java", "j2ee", "jee",
+                "servlet", "jsp", "ejb", "enterprise application", "microservices"
             ],
-            "tools": ["maven", "gradle", "ant", "junit", "mockito", "intellij", "eclipse"],
-            "frameworks": ["spring", "spring boot", "spring mvc", "hibernate", "struts"],
-            "databases": ["oracle", "mysql", "postgresql", "mongodb", "redis"],
-            "cloud": ["aws", "azure", "gcp", "openshift", "kubernetes"]
+            "tools": ["maven", "gradle", "ant", "junit", "mockito", "intellij", "eclipse", "jenkins"],
+            "frameworks": ["spring", "spring boot", "spring mvc", "hibernate", "struts", "jsf"],
+            "databases": ["oracle", "mysql", "postgresql", "mongodb", "redis", "h2"],
+            "cloud": ["aws", "azure", "gcp", "openshift", "kubernetes", "docker"]
         },
         "cybersecurity": {
             "keywords": [
                 "security", "cybersecurity", "cyber security", "penetration", "ethical hacker",
                 "vulnerability", "threat", "incident response", "soc", "siem", "firewall",
-                "ids", "ips", "malware", "forensics", "compliance", "audit", "risk"
+                "ids", "ips", "malware", "forensics", "compliance", "audit", "risk",
+                "security analyst", "security engineer", "information security"
             ],
-            "tools": ["wireshark", "nmap", "metasploit", "burp suite", "nessus", "owasp"],
-            "frameworks": ["owasp", "nist", "iso 27001", "pci dss"],
-            "databases": ["splunk", "elk", "qradar", "fireeye"],
-            "cloud": ["aws security", "azure defender", "gcp security"]
+            "tools": ["wireshark", "nmap", "metasploit", "burp suite", "nessus", "owasp", "kali linux"],
+            "frameworks": ["owasp", "nist", "iso 27001", "pci dss", "gdpr"],
+            "databases": ["splunk", "elk", "qradar", "fireeye", "logrhythm"],
+            "cloud": ["aws security", "azure defender", "gcp security", "cloud security"]
         },
         "data_science": {
             "keywords": [
                 "data scientist", "data analyst", "machine learning", "ml", "deep learning",
                 "ai", "artificial intelligence", "statistics", "predictive modeling",
-                "data visualization", "nlp", "computer vision", "big data"
+                "data visualization", "nlp", "computer vision", "big data", "data mining",
+                "statistical analysis", "regression", "classification", "clustering",
+                "neural networks", "tensorflow", "pytorch", "scikit-learn"
             ],
-            "tools": ["python", "r", "sql", "pandas", "numpy", "scikit-learn", "tensorflow", "pytorch"],
-            "frameworks": ["scikit-learn", "tensorflow", "pytorch", "keras", "spark"],
-            "databases": ["postgresql", "mysql", "mongodb", "hadoop", "spark"],
-            "cloud": ["aws", "azure", "gcp", "databricks", "sagemaker"]
+            "tools": ["jupyter", "r", "sql", "pandas", "numpy", "scikit-learn", "tensorflow", "pytorch", "matplotlib", "seaborn"],
+            "frameworks": ["scikit-learn", "tensorflow", "pytorch", "keras", "spark", "hadoop"],
+            "databases": ["postgresql", "mysql", "mongodb", "hadoop", "spark", "hive", "kafka"],
+            "cloud": ["aws", "azure", "gcp", "databricks", "sagemaker", "mlflow"]
         },
         "devops": {
             "keywords": [
                 "devops", "ci/cd", "continuous integration", "continuous deployment",
-                "infrastructure", "automation", "monitoring", "logging", "deployment"
+                "infrastructure", "automation", "monitoring", "logging", "deployment",
+                "site reliability", "sre", "platform engineer", "infrastructure engineer"
             ],
-            "tools": ["docker", "kubernetes", "jenkins", "gitlab", "github actions", "terraform", "ansible"],
-            "frameworks": ["kubernetes", "docker swarm", "jenkins", "gitlab ci"],
-            "databases": ["prometheus", "grafana", "elk", "splunk"],
-            "cloud": ["aws", "azure", "gcp", "digitalocean", "linode"]
+            "tools": ["docker", "kubernetes", "jenkins", "gitlab", "github actions", "terraform", "ansible", "prometheus"],
+            "frameworks": ["kubernetes", "docker swarm", "jenkins", "gitlab ci", "github actions"],
+            "databases": ["prometheus", "grafana", "elk", "splunk", "influxdb"],
+            "cloud": ["aws", "azure", "gcp", "digitalocean", "linode", "vultr"]
         },
         "cloud_engineering": {
             "keywords": [
                 "cloud engineer", "cloud architect", "aws engineer", "azure engineer",
-                "gcp engineer", "cloud developer", "infrastructure engineer"
+                "gcp engineer", "cloud developer", "infrastructure engineer", "cloud solutions",
+                "cloud migration", "cloud native", "serverless", "containerization"
             ],
-            "tools": ["terraform", "cloudformation", "ansible", "docker", "kubernetes"],
-            "frameworks": ["aws", "azure", "gcp", "kubernetes", "docker"],
-            "databases": ["rds", "dynamodb", "cosmos db", "firestore"],
-            "cloud": ["aws", "azure", "gcp", "digitalocean", "linode"]
+            "tools": ["terraform", "cloudformation", "ansible", "docker", "kubernetes", "helm"],
+            "frameworks": ["aws", "azure", "gcp", "kubernetes", "docker", "serverless"],
+            "databases": ["rds", "dynamodb", "cosmos db", "firestore", "aurora"],
+            "cloud": ["aws", "azure", "gcp", "digitalocean", "linode", "vultr"]
         }
     }
     
-    # Calculate detailed scores for each domain
+    # Calculate detailed scores for each domain with improved weighting
     domain_scores = {}
     for domain, data in domain_keywords.items():
         # Count keyword matches
@@ -644,12 +654,27 @@ def analyze_resume_type(resume_text: str) -> dict:
         database_matches = [db for db in data["databases"] if db.lower() in resume_text.lower()]
         cloud_matches = [cloud for cloud in data["cloud"] if cloud.lower() in resume_text.lower()]
         
-        # Calculate weighted score
-        keyword_score = len(keyword_matches) / len(data["keywords"]) * 40  # 40% weight
-        tool_score = len(tool_matches) / len(data["tools"]) * 25  # 25% weight
-        framework_score = len(framework_matches) / len(data["frameworks"]) * 20  # 20% weight
-        database_score = len(database_matches) / len(data["databases"]) * 10  # 10% weight
-        cloud_score = len(cloud_matches) / len(data["cloud"]) * 5  # 5% weight
+        # Improved weighting system - give more weight to specific domain keywords
+        keyword_score = len(keyword_matches) / len(data["keywords"]) * 50  # Increased to 50%
+        tool_score = len(tool_matches) / len(data["tools"]) * 20  # Reduced to 20%
+        framework_score = len(framework_matches) / len(data["frameworks"]) * 20  # 20%
+        database_score = len(database_matches) / len(data["databases"]) * 7  # Reduced to 7%
+        cloud_score = len(cloud_matches) / len(data["cloud"]) * 3  # Reduced to 3%
+        
+        # Special boost for full stack developers
+        if domain == "javascript_fullstack":
+            # Boost for full stack specific terms
+            full_stack_terms = ["full stack", "fullstack", "frontend", "backend", "web development"]
+            full_stack_matches = sum(1 for term in full_stack_terms if term in resume_text.lower())
+            if full_stack_matches >= 2:
+                keyword_score += 0.2  # 20% boost for clear full stack indicators
+        
+        # Penalty for data science if it's clearly a web development resume
+        if domain == "data_science":
+            web_dev_terms = ["javascript", "react", "angular", "vue", "html", "css", "web", "frontend", "backend"]
+            web_dev_matches = sum(1 for term in web_dev_terms if term in resume_text.lower())
+            if web_dev_matches >= 3:
+                keyword_score *= 0.5  # 50% penalty if strong web development indicators
         
         total_score = keyword_score + tool_score + framework_score + database_score + cloud_score
         
