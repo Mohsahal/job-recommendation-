@@ -1,63 +1,63 @@
+
 Mohammed Sahal
 📞 +91-XXXXXXXXXX | 📧 sahal@example.com | 🌍 Bangalore, India | LinkedIn | GitHub
 
 ====================================================================
 Professional Summary
 ====================================================================
-AI/ML Engineer with strong expertise in machine learning, deep learning, and data analysis. Skilled in building scalable AI models, deploying ML pipelines, and extracting actionable insights from large datasets. Passionate about developing intelligent systems and solving complex problems using AI.
+Frontend Developer with expertise in building responsive and interactive web applications using modern frameworks and tools. Skilled in React, JavaScript, HTML, CSS, and UI/UX design. Passionate about creating seamless user experiences and clean, maintainable code.
 
 ====================================================================
 Key Skills
 ====================================================================
-- Programming Languages: Python, R, SQL
-- Machine Learning: Scikit-learn, XGBoost, LightGBM
-- Deep Learning: TensorFlow, Keras, PyTorch
-- Data Processing: Pandas, NumPy, Spark
-- Natural Language Processing: NLTK, spaCy, Hugging Face Transformers
-- Cloud & Deployment: AWS, GCP, Docker, Flask, FastAPI
-- Data Visualization: Matplotlib, Seaborn, Plotly
-- Tools: Git, Jupyter Notebook, VS Code
+- Programming Languages: JavaScript, TypeScript, HTML5, CSS3
+- Frameworks/Libraries: React, Redux, Next.js, Tailwind CSS
+- Tools: Git, Webpack, Babel, npm, Yarn
+- UI/UX: Responsive Design, Figma, Adobe XD
+- Testing: Jest, React Testing Library
+- Deployment: Vercel, Netlify, AWS
+- Others: REST APIs, GraphQL, Axios, Firebase
 
 ====================================================================
 Professional Experience
 ====================================================================
-AI/ML Engineer | XYZ Tech Solutions | Bangalore, India | Jan 2023 – Present
-- Developed and deployed machine learning models for predictive analytics, achieving 95% accuracy on key business metrics.
-- Designed end-to-end ML pipelines using Python, Docker, and cloud services for scalable deployment.
-- Performed data cleaning, feature engineering, and exploratory data analysis on large datasets.
-- Implemented NLP solutions for text classification and sentiment analysis, improving client insights.
+Frontend Developer | XYZ Web Solutions | Bangalore, India | Jan 2023 – Present
+- Developed dynamic, responsive web applications using React and Tailwind CSS.
+- Implemented state management with Redux and optimized component rendering.
+- Integrated RESTful APIs and GraphQL endpoints for seamless data fetching.
+- Collaborated with UI/UX designers to enhance user experience and accessibility.
 
-Data Scientist Intern | ABC Analytics | Bangalore, India | Jun 2022 – Dec 2022
-- Built regression and classification models using Scikit-learn and XGBoost.
-- Conducted data visualization and reporting to support business decisions.
-- Assisted in developing recommendation systems using collaborative filtering and content-based approaches.
+Frontend Developer Intern | ABC Digital Labs | Bangalore, India | Jun 2022 – Dec 2022
+- Assisted in building responsive web interfaces using React and Next.js.
+- Participated in code reviews and implemented best practices for frontend development.
+- Worked on optimizing page load speed and performance improvements.
 
 ====================================================================
 Education
 ====================================================================
 Bachelor of Technology in Computer Science | University of Bangalore | 2018 – 2022
-- Relevant Coursework: Machine Learning, Data Science, Artificial Intelligence, Deep Learning
+- Relevant Coursework: Web Development, Human-Computer Interaction, Software Engineering
 
 ====================================================================
 Projects
 ====================================================================
-1. Predictive Maintenance using ML
-- Built a model to predict equipment failure using sensor data.
-- Reduced downtime by 20% through proactive maintenance alerts.
+1. E-commerce Web Application
+- Built a responsive e-commerce site with React, Redux, and Tailwind CSS.
+- Implemented product search, filters, and shopping cart functionality.
 
-2. Sentiment Analysis on Social Media
-- Implemented NLP pipeline for real-time sentiment classification.
-- Used LSTM networks for improved accuracy over traditional methods.
+2. Personal Portfolio Website
+- Designed and developed a personal portfolio using React and CSS animations.
+- Showcased projects, skills, and contact form integration.
 
-3. Image Classification with CNN
-- Developed Convolutional Neural Networks for multi-class image classification.
-- Achieved 92% validation accuracy on benchmark dataset.
+3. Blogging Platform
+- Developed a full-featured blogging platform with Next.js and Firebase.
+- Enabled CRUD operations, user authentication, and real-time updates.
 
 ====================================================================
 Certifications
 ====================================================================
-- Machine Learning by Stanford University (Coursera)
-- Deep Learning Specialization (Coursera)
-- AWS Certified Machine Learning – Specialty
+- Frontend Development with React (Coursera)
+- JavaScript Algorithms and Data Structures (freeCodeCamp)
+- Responsive Web Design Certification (freeCodeCamp)
 
 ====================================================================
