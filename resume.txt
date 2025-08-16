@@ -1,0 +1,63 @@
+Mohammed Sahal
+📞 +91-XXXXXXXXXX | 📧 sahal@example.com | 🌍 Bangalore, India | LinkedIn | GitHub
+
+====================================================================
+Professional Summary
+====================================================================
+AI/ML Engineer with strong expertise in machine learning, deep learning, and data analysis. Skilled in building scalable AI models, deploying ML pipelines, and extracting actionable insights from large datasets. Passionate about developing intelligent systems and solving complex problems using AI.
+
+====================================================================
+Key Skills
+====================================================================
+- Programming Languages: Python, R, SQL
+- Machine Learning: Scikit-learn, XGBoost, LightGBM
+- Deep Learning: TensorFlow, Keras, PyTorch
+- Data Processing: Pandas, NumPy, Spark
+- Natural Language Processing: NLTK, spaCy, Hugging Face Transformers
+- Cloud & Deployment: AWS, GCP, Docker, Flask, FastAPI
+- Data Visualization: Matplotlib, Seaborn, Plotly
+- Tools: Git, Jupyter Notebook, VS Code
+
+====================================================================
+Professional Experience
+====================================================================
+AI/ML Engineer | XYZ Tech Solutions | Bangalore, India | Jan 2023 – Present
+- Developed and deployed machine learning models for predictive analytics, achieving 95% accuracy on key business metrics.
+- Designed end-to-end ML pipelines using Python, Docker, and cloud services for scalable deployment.
+- Performed data cleaning, feature engineering, and exploratory data analysis on large datasets.
+- Implemented NLP solutions for text classification and sentiment analysis, improving client insights.
+
+Data Scientist Intern | ABC Analytics | Bangalore, India | Jun 2022 – Dec 2022
+- Built regression and classification models using Scikit-learn and XGBoost.
+- Conducted data visualization and reporting to support business decisions.
+- Assisted in developing recommendation systems using collaborative filtering and content-based approaches.
+
+====================================================================
+Education
+====================================================================
+Bachelor of Technology in Computer Science | University of Bangalore | 2018 – 2022
+- Relevant Coursework: Machine Learning, Data Science, Artificial Intelligence, Deep Learning
+
+====================================================================
+Projects
+====================================================================
+1. Predictive Maintenance using ML
+- Built a model to predict equipment failure using sensor data.
+- Reduced downtime by 20% through proactive maintenance alerts.
+
+2. Sentiment Analysis on Social Media
+- Implemented NLP pipeline for real-time sentiment classification.
+- Used LSTM networks for improved accuracy over traditional methods.
+
+3. Image Classification with CNN
+- Developed Convolutional Neural Networks for multi-class image classification.
+- Achieved 92% validation accuracy on benchmark dataset.
+
+====================================================================
+Certifications
+====================================================================
+- Machine Learning by Stanford University (Coursera)
+- Deep Learning Specialization (Coursera)
+- AWS Certified Machine Learning – Specialty
+
+====================================================================
